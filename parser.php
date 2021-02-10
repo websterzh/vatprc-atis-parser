@@ -6,6 +6,10 @@ use MetarDecoder\MetarDecoder;
 include(__DIR__ . '/airports.php');
 
 $rawMetar = $_GET['metar'];
+// FIXME: Dirty fix to issue caused by `8000NW` in the METAR
+// METAR ZMUB 100530Z VRB02MPS 8000NW BKN250 M07/M12 Q1005 NOSIG RMK QFE647.5 62 NW MO=
+$rawMetar = preg_replace('/ (\d{4})[NWSE]+ /', ' $1 ', $rawMetar);
+
 $decoder = new MetarDecoder();
 $decoded = $decoder->parse($rawMetar);
 $surfaceWindObj = $decoded->getSurfaceWind(); //SurfaceWind object
