@@ -18,6 +18,7 @@ $rvr = $decoded->getRunwaysVisualRange(); //RunwayVisualRange array
 $phenomenon = $decoded->getPresentWeather(); //WeatherPhenomenon array
 $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
+$type = array_key_exists ('type',$_GET);
 
 if ($decoded->isValid() == false) {
     exit('Invalid METAR.');
@@ -25,23 +26,32 @@ if ($decoded->isValid() == false) {
 
 // Airport, date & time
 $airportName = (isset($airports[$decoded->getIcao()])) ? $airports[$decoded->getIcao()] : $decoded->getIcao();
-print($airportName . ' information ' . $_GET['info'] . ', ' . substr($rawMetar, 7, 4) . ' [UTC]');
+if($type and $_GET['type'] == 'D'){
+    print ($airportName . ' departure Information ');
+} elseif ($type and $_GET['type'] == 'A'){
+    print ($airportName . ' arrival Information ');
+} else {
+    print ($airportName . ' Information ');
+}
+print ($_GET['info'] . ', '. substr($rawMetar, 7, 4) . ' [UTC]');
 if (strpos($decoded->getTime(), ':00') === false and strpos($decoded->getTime(), ':30') === false) {
     print(', special');
 }
 print(', ');
 
 // Operational Runway
-if ($_GET['dep'] == $_GET['arr']) {
-    print('Runway ' . $_GET['dep']);
+if($type and $_GET['type'] == 'D'){
+    print('Departure runway ' . $_GET['dep'] . ', ');
+} elseif ($type and $_GET['type'] == 'A'){
+    print('Landing runway ' . $_GET['arr'] . ', ' . $_GET['apptype'] . ' approach expected, ');
 } else {
-    print('Departure runway ' . $_GET['dep'] . ', landing runway ' . $_GET['arr']);
+    if ($_GET['dep'] == $_GET['arr']) {
+        print('Runway ' . $_GET['dep']);
+    } else {
+        print('Departure runway ' . $_GET['dep'] . ', landing runway ' . $_GET['arr'] . ', ' . $_GET['apptype'] . ' approach expected');
+    }
+    print(', ');
 }
-print(', ');
-
-// Expect approach method
-print('Expect ' . $_GET['apptype'] . ' approach, runway ' . $_GET['arr']);
-print(', ');
 
 // Wind
 print('Wind ');
