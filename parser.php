@@ -46,7 +46,7 @@ if($type and $_GET['type'] == 'D'){
     print('Landing runway ' . $_GET['arr'] . ', ' . $_GET['apptype'] . ' approach expected, ');
 } else {
     if ($_GET['dep'] == $_GET['arr']) {
-        print('Runway ' . $_GET['dep']);
+        print('Runway ' . $_GET['dep'] . ', ' . $_GET['apptype'] . ' approach expected');
     } else {
         print('Departure runway ' . $_GET['dep'] . ', landing runway ' . $_GET['arr'] . ', ' . $_GET['apptype'] . ' approach expected');
     }
