@@ -26,12 +26,12 @@ if ($decoded->isValid() == false) {
 
 // Airport, date & time
 $airportName = (isset($airports[$decoded->getIcao()])) ? $airports[$decoded->getIcao()] : $decoded->getIcao();
-if($type and $_GET['type'] == 'D'){
-    print ($airportName . ' departure Information ');
-} elseif ($type and $_GET['type'] == 'A'){
-    print ($airportName . ' arrival Information ');
+if($type && $_GET['type'] === 'D'){
+    print($airportName . ' departure Information ');
+} elseif ($type && $_GET['type'] === 'A'){
+    print($airportName . ' arrival Information ');
 } else {
-    print ($airportName . ' Information ');
+    print($airportName . ' Information ');
 }
 print ($_GET['info'] . ', '. substr($rawMetar, 7, 4) . ' [UTC]');
 if (strpos($decoded->getTime(), ':00') === false and strpos($decoded->getTime(), ':30') === false) {
@@ -40,12 +40,12 @@ if (strpos($decoded->getTime(), ':00') === false and strpos($decoded->getTime(),
 print(', ');
 
 // Operational Runway
-if($type and $_GET['type'] == 'D'){
+if($type && $_GET['type'] === 'D'){
     print('Departure runway ' . $_GET['dep'] . ', ');
-} elseif ($type and $_GET['type'] == 'A'){
+} elseif ($type && $_GET['type'] === 'A'){
     print('Landing runway ' . $_GET['arr'] . ', ' . $_GET['apptype'] . ' approach expected, ');
 } else {
-    if ($_GET['dep'] == $_GET['arr']) {
+    if ($_GET['dep'] === $_GET['arr']) {
         print('Runway ' . $_GET['dep']);
     } else {
         print('Departure runway ' . $_GET['dep'] . ', landing runway ' . $_GET['arr']);
