@@ -33,7 +33,7 @@ if($type && $_GET['type'] === 'D'){
 } else {
     print($airportName . ' Information ');
 }
-print ($_GET['info'] . ', '. substr($rawMetar, 7, 4) . ' [UTC]');
+print($_GET['info'] . ', '. substr($rawMetar, 7, 4) . ' [UTC]');
 if (strpos($decoded->getTime(), ':00') === false and strpos($decoded->getTime(), ':30') === false) {
     print(', special');
 }
