@@ -3,7 +3,7 @@ require_once 'vendor/autoload.php';
 
 use MetarDecoder\MetarDecoder;
 
-include '/airports.php';
+require '/airports.php';
 
 $rawMetar = $_GET['metar'];
 // FIXME: Dirty fix to issue caused by `8000NW` in the METAR
@@ -20,10 +20,11 @@ $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
 
-function reform($num) {
+function reform($num)
+{
     $org = array(",");
     $after = array(" AND ");
-    print str_replace($org,$after,$num);
+    print str_replace($org, $after, $num);
 }
 
 if ($decoded->isValid() == false) {
@@ -91,15 +92,15 @@ if ($rvr != null) {
             print(' M');
         }
         switch ($runwayRvr->getPastTendency()) {
-                case 'D':
+        case 'D':
                 print(' DOWNWARD TNDCY ');
-                break;
-                case 'N':
+                    break;
+        case 'N':
                 print(' NC ');
-                break;
-                case 'U':
+                    break;
+        case 'U':
                 print(' UPWARD TNDCY ');
-                break;
+                    break;
         }
     }
 }
@@ -116,10 +117,10 @@ foreach ($phenomenon as $pwn) {
         print($pwn->getCharacteristics());
     }
     if (is_array($pwn->getTypes())) {
-    foreach ($pwn->getTypes() as $pwntype) {
-        print($pwntype);
-        print(' ');
-    }
+        foreach ($pwn->getTypes() as $pwntype) {
+            print($pwntype);
+            print(' ');
+        }
     } else {
         print(' ');
     }
@@ -161,7 +162,7 @@ if ($surfaceWindObj->getMeanSpeed()->getValue() == 0) {
         $out_sw = $str_sw ;
     }
 
-print($out_sw . ' MPS ');
+    print($out_sw . ' MPS ');
 
 }
 If ($surfaceWindObj->getSpeedVariations() != null) {
@@ -192,22 +193,22 @@ if ($int_temp_data < 10 && $int_temp_data > 0) {
         $out_temp_data = '-0' . $str_temp_data[1];
     } elseif ($int_temp_data == 0) {
         $out_temp_data = '00';
-    } else    {
+    } else {
         $out_temp_data = $str_temp_data ;
-    }
+}
 
 $dewpt_data = $decoded->getDewPointTemperature()->getValue();
 $int_dewpt_data = (int)$dewpt_data;
 $str_dewpt_data = strval($int_dewpt_data);
 if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
         $out_dewpt_data = '0' . $str_dewpt_data ;
-    } elseif ($int_dewpt_data < 0 && $int_dewpt_data > -10) {
+} elseif ($int_dewpt_data < 0 && $int_dewpt_data > -10) {
         $out_dewpt_data = '-0' . $str_dewpt_data[1];
-    } elseif ($int_dewpt_data == 0) {
+} elseif ($int_dewpt_data == 0) {
         $out_dewpt_data = '00';
-    } else {
+} else {
         $out_dewpt_data = $str_dewpt_data ;
-    }
+}
 
 print(' T ' . $out_temp_data . ' /DP ' . $out_dewpt_data . ' QNH ' . $decoded->getPressure()->getValue() . ' HPA ');
 
