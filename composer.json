@@ -8,7 +8,7 @@
     },
     "scripts": {
         "code-sniff": [
-            "./vendor/bin/phpcbf --ignore=vendor --standard=./lint/ruleset.xml ./"
+            "./vendor/bin/phpcs --ignore=vendor --standard=./lint/ruleset.xml ./"
         ]
     }
 }
