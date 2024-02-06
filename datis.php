@@ -3,7 +3,7 @@ require_once 'vendor/autoload.php';
 
 use MetarDecoder\MetarDecoder;
 
-include(__DIR__ . '/airports.php');
+include '/airports.php';
 
 $rawMetar = $_GET['metar'];
 // FIXME: Dirty fix to issue caused by `8000NW` in the METAR
