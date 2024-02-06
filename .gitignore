@@ -1,3 +1,4 @@
 *.xml
+!lint/*.xml
 .idea/
 vendor/
