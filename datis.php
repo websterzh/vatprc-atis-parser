@@ -20,10 +20,10 @@ $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
 
-function reform($num){
-$org = array(",");
-$after = array(" AND ");
-print str_replace($org,$after,$num);
+function reform($num) {
+    $org = array(",");
+    $after = array(" AND ");
+    print str_replace($org,$after,$num);
 }
 
 if ($decoded->isValid() == false) {
@@ -69,7 +69,7 @@ if ($decoded->getWindshearAllRunways()) {
 
 // Visibility
 if (strpos($rawMetar, 'CAVOK') !== false) {    
-print(' CAVOK ');
+    print(' CAVOK ');
 } else {
     print(' VIS ' . $visObj->getVisibility()->getValue() . ' M ');
 }
@@ -80,24 +80,24 @@ if ($rvr != null) {
         print('RVR RWY ');
         print($runwayRvr->getRunway());
         if ($runwayRvr->getVisualRange() == null) {
-        print(' BTW ');
-        print($runwayRvr->getVisualRangeInterval()[0]->getValue());
-        print(' M AND ');
-        print($runwayRvr->getVisualRangeInterval()[1]->getValue());
-        print(' M ');
+            print(' BTW ');
+            print($runwayRvr->getVisualRangeInterval()[0]->getValue());
+            print(' M AND ');
+            print($runwayRvr->getVisualRangeInterval()[1]->getValue());
+            print(' M ');
         } else {
             print(' ');
             print($runwayRvr->getVisualRange()->getValue());
             print(' M');
         }
         switch ($runwayRvr->getPastTendency()) {
-            case 'D':
+                case 'D':
                 print(' DOWNWARD TNDCY ');
                 break;
-            case 'N':
+                case 'N':
                 print(' NC ');
                 break;
-            case 'U':
+                case 'U':
                 print(' UPWARD TNDCY ');
                 break;
         }
@@ -105,25 +105,25 @@ if ($rvr != null) {
 }
 
 // Cloud & Weather Phenomenon
-    if (strpos($rawMetar, 'NSC') === true) {
-        print(' NSC');
+if (strpos($rawMetar, 'NSC') === true) {
+    print(' NSC');
+}
+foreach ($phenomenon as $pwn) {
+    if ((string)$pwn->getIntensityProximity() !== '') {
+        print($pwn->getIntensityProximity());
     }
-    foreach ($phenomenon as $pwn) {
-        if ((string)$pwn->getIntensityProximity() !== '') {
-            print($pwn->getIntensityProximity());
-        }
-        if ($pwn->getCharacteristics() !== '') {
-            print($pwn->getCharacteristics());
-        }
-        if (is_array($pwn->getTypes())){
-        foreach ($pwn->getTypes() as $pwntype) {
-            print($pwntype);
-            print(' ');
-        }
-        } else {
-            print(' ');
-        }
+    if ($pwn->getCharacteristics() !== '') {
+        print($pwn->getCharacteristics());
     }
+    if (is_array($pwn->getTypes())) {
+    foreach ($pwn->getTypes() as $pwntype) {
+        print($pwntype);
+        print(' ');
+    }
+    } else {
+        print(' ');
+    }
+}
 foreach ($clouds as $cloud) {
     print($cloud->getAmount());
     $baseHeight = $cloud->getBaseHeight();
@@ -157,7 +157,7 @@ if ($surfaceWindObj->getMeanSpeed()->getValue() == 0) {
     $str_sw = strval($int_sw);
     if ($int_sw < 10) {
         $out_sw = '0' . $str_sw ;
-    } else{
+    } else {
         $out_sw = $str_sw ;
     }
 
@@ -165,9 +165,9 @@ print($out_sw . ' MPS ');
 
 }
 If ($surfaceWindObj->getSpeedVariations() != null) {
-    if ($surfaceWindObj->getSpeedVariations()->getValue() < 10){
+    if ($surfaceWindObj->getSpeedVariations()->getValue() < 10) {
         print(' GUST 0' . $surfaceWindObj->getSpeedVariations()->getValue() . ' MPS ');
-    }else {
+    } else {
             print(' GUST ' . $surfaceWindObj->getSpeedVariations()->getValue() . ' MPS ');
     }
 }
@@ -188,9 +188,9 @@ $int_temp_data = (int)$temp_data;
 $str_temp_data = strval($int_temp_data);
 if ($int_temp_data < 10 && $int_temp_data > 0) {
         $out_temp_data = '0' . $str_temp_data ;
-    } elseif ($int_temp_data < 0 && $int_temp_data > -10){
+    } elseif ($int_temp_data < 0 && $int_temp_data > -10) {
         $out_temp_data = '-0' . $str_temp_data[1];
-    } elseif ($int_temp_data == 0){
+    } elseif ($int_temp_data == 0) {
         $out_temp_data = '00';
     } else    {
         $out_temp_data = $str_temp_data ;
@@ -201,11 +201,11 @@ $int_dewpt_data = (int)$dewpt_data;
 $str_dewpt_data = strval($int_dewpt_data);
 if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
         $out_dewpt_data = '0' . $str_dewpt_data ;
-    } elseif ($int_dewpt_data < 0 && $int_dewpt_data > -10){
+    } elseif ($int_dewpt_data < 0 && $int_dewpt_data > -10) {
         $out_dewpt_data = '-0' . $str_dewpt_data[1];
-    } elseif ($int_dewpt_data == 0){
+    } elseif ($int_dewpt_data == 0) {
         $out_dewpt_data = '00';
-    } else    {
+    } else {
         $out_dewpt_data = $str_dewpt_data ;
     }
 
