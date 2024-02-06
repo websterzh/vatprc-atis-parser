@@ -3,7 +3,7 @@ require_once 'vendor/autoload.php';
 
 use MetarDecoder\MetarDecoder;
 
-include(__DIR__ . '/airports.php');
+require __DIR__ . '/airports.php';
 
 $rawMetar = $_GET['metar'];
 // FIXME: Dirty fix to issue caused by `8000NW` in the METAR
@@ -86,12 +86,12 @@ if (strpos($rawMetar, 'CAVOK') !== false) {
     } else {
         print('{' . $visObj->getVisibility()->getValue() . '}');
         switch ($visObj->getVisibility()->getUnit()) {
-            case 'm':
-                print(' meter');
-                break;
-            case 'SM':
-                print(' mile');
-                break;
+        case 'm':
+            print(' meter');
+            break;
+        case 'SM':
+            print(' mile');
+            break;
         }
         if ($visObj->getVisibility()->getValue() != 1) {
             print('s');
@@ -125,14 +125,14 @@ if (strpos($rawMetar, 'CAVOK') !== false) {
                 }
             }
             switch ($runwayRvr->getPastTendency()) {
-                case 'D':
-                    print(' downward');
-                    break;
-                case 'N':
-                    break;
-                case 'U':
-                    print(' upward');
-                    break;
+            case 'D':
+                print(' downward');
+                break;
+            case 'N':
+                break;
+            case 'U':
+                print(' upward');
+                break;
             }
             print(', ');
         }
@@ -150,108 +150,108 @@ if (strpos($rawMetar, 'CAVOK') !== false) {
             }
             if ((string) $pwn->getIntensityProximity() !== '') {
                 switch ((string) $pwn->getIntensityProximity()) {
-                    case '+':
-                        print('Heavy');
-                        break;
-                    case '-':
-                        print('Light');
-                        break;
+                case '+':
+                    print('Heavy');
+                    break;
+                case '-':
+                    print('Light');
+                    break;
                 }
             }
             if ($pwn->getCharacteristics() !== '') {
                 switch ($pwn->getCharacteristics()) {
-                    case 'MI':
-                        print(' shallow');
-                        break;
-                    case 'BC':
-                        print(' patches');
-                        break;
-                    case 'PR':
-                        print(' partial');
-                        break;
-                    case 'DR':
-                        print(' drifting');
-                        break;
-                    case 'BL':
-                        print(' blowing');
-                        break;
-                    case 'SH':
-                        print(' showers');
-                        break;
-                    case 'TS':
-                        print(' thunderstorm');
-                        break;
-                    case 'FZ':
-                        print(' freezing');
-                        break;
+                case 'MI':
+                    print(' shallow');
+                    break;
+                case 'BC':
+                    print(' patches');
+                    break;
+                case 'PR':
+                    print(' partial');
+                    break;
+                case 'DR':
+                    print(' drifting');
+                    break;
+                case 'BL':
+                    print(' blowing');
+                    break;
+                case 'SH':
+                    print(' showers');
+                    break;
+                case 'TS':
+                    print(' thunderstorm');
+                    break;
+                case 'FZ':
+                    print(' freezing');
+                    break;
                 }
             }
             if ($pwn->getTypes()) {
                 foreach ($pwn->getTypes() as $pwntype) {
                     switch ($pwntype) {
-                        case 'DZ':
-                            print(' drizzle');
-                            break;
-                        case 'RA':
-                            print(' rain');
-                            break;
-                        case 'SN':
-                            print(' snow');
-                            break;
-                        case 'SG':
-                            print(' snow grains');
-                            break;
-                        case 'IC':
-                            print(' ice crystals');
-                            break;
-                        case 'PL':
-                            print(' ice pellets');
-                            break;
-                        case 'GR':
-                            print(' hail');
-                            break;
-                        case 'GS':
-                            print(' snow pellets');
-                            break;
-                        case 'UP':
-                            print(' unknown precipitation');
-                            break;
-                        case 'BR':
-                            print(' mist');
-                            break;
-                        case 'FG':
-                            print(' fog');
-                            break;
-                        case 'FU':
-                            print(' smoke');
-                            break;
-                        case 'VA':
-                            print(' volcanic ash');
-                            break;
-                        case 'DU':
-                            print(' dust');
-                            break;
-                        case 'SA':
-                            print(' sand');
-                            break;
-                        case 'HZ':
-                            print(' haze');
-                            break;
-                        case 'PO':
-                            print(' dust whirls');
-                            break;
-                        case 'SQ':
-                            print(' squalls');
-                            break;
-                        case 'FC':
-                            print(' funnel cloud');
-                            break;
-                        case 'SS':
-                            print(' sandstorm');
-                            break;
-                        case 'DS':
-                            print(' duststorm');
-                            break;
+                    case 'DZ':
+                        print(' drizzle');
+                        break;
+                    case 'RA':
+                        print(' rain');
+                        break;
+                    case 'SN':
+                        print(' snow');
+                        break;
+                    case 'SG':
+                        print(' snow grains');
+                        break;
+                    case 'IC':
+                        print(' ice crystals');
+                        break;
+                    case 'PL':
+                        print(' ice pellets');
+                        break;
+                    case 'GR':
+                        print(' hail');
+                        break;
+                    case 'GS':
+                        print(' snow pellets');
+                        break;
+                    case 'UP':
+                        print(' unknown precipitation');
+                        break;
+                    case 'BR':
+                        print(' mist');
+                        break;
+                    case 'FG':
+                        print(' fog');
+                        break;
+                    case 'FU':
+                        print(' smoke');
+                        break;
+                    case 'VA':
+                        print(' volcanic ash');
+                        break;
+                    case 'DU':
+                        print(' dust');
+                        break;
+                    case 'SA':
+                        print(' sand');
+                        break;
+                    case 'HZ':
+                        print(' haze');
+                        break;
+                    case 'PO':
+                        print(' dust whirls');
+                        break;
+                    case 'SQ':
+                        print(' squalls');
+                        break;
+                    case 'FC':
+                        print(' funnel cloud');
+                        break;
+                    case 'SS':
+                        print(' sandstorm');
+                        break;
+                    case 'DS':
+                        print(' duststorm');
+                        break;
                     }
                 }
             }
@@ -273,33 +273,33 @@ if ($clouds) {
             print(', ');
         }
         switch ($cloud->getAmount()) {
-            case 'FEW':
-                print('Few');
-                break;
-            case 'SCT':
-                print('Scattered');
-                break;
-            case 'BKN':
-                print('Broken');
-                break;
-            case 'OVC':
-                print('Overcast');
-                break;
-            case 'VV':
-                print('Vertical visibility');
-                break;
+        case 'FEW':
+            print('Few');
+            break;
+        case 'SCT':
+            print('Scattered');
+            break;
+        case 'BKN':
+            print('Broken');
+            break;
+        case 'OVC':
+            print('Overcast');
+            break;
+        case 'VV':
+            print('Vertical visibility');
+            break;
         }
         switch ($cloud->getBaseHeight()->getUnit()) {
-            case 'ft';
-                print(' [' . $cloud->getBaseHeight()->getValue() * 0.3 . ']' . ' meters');
+        case 'ft';
+            print(' [' . $cloud->getBaseHeight()->getValue() * 0.3 . ']' . ' meters');
         }
         switch ($cloud->getType()) {
-            case 'CB':
-                print(' cumulonimbus');
-                break;
-            case 'TCU':
-                print(' towering cumulus');
-                break;
+        case 'CB':
+            print(' cumulonimbus');
+            break;
+        case 'TCU':
+            print(' towering cumulus');
+            break;
         }
     }
     print(', ');
