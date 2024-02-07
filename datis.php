@@ -20,11 +20,11 @@ $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
 
-function reform($num)
+function reform($num) //,替换成AND
 {
-    $org = array(","); //以,区分
-    $after = array(" AND "); //新连接符 AND
-    print str_replace($org, $after, $num); //把,变成AND
+    $org = array(",");
+    $after = array(" AND ");
+    print str_replace($org, $after, $num);
 }
 
 if ($decoded->isValid() == false) {
