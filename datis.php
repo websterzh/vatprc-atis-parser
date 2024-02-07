@@ -22,9 +22,9 @@ $type = $_GET['type'] ?? null;
 
 function reform($num)
 {
-    $org = array(",");
-    $after = array(" AND ");
-    print str_replace($org, $after, $num);
+    $org = array(","); //以,区分
+    $after = array(" AND "); //新连接符 AND
+    print str_replace($org, $after, $num); //把,变成AND
 }
 
 if ($decoded->isValid() == false) {
