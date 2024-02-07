@@ -5,6 +5,7 @@ on:
       - opened
       - reopened
       - review_requested
+      - synchronize
     branches:
       - master
 
