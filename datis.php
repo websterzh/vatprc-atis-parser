@@ -20,13 +20,6 @@ $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
 
-function reform($num) //,替换成AND
-{
-    $org = array(",");
-    $after = array(" AND ");
-    print str_replace($org, $after, $num);
-}
-
 if ($decoded->isValid() == false) {
     exit('Invalid METAR.');
 }
@@ -44,12 +37,13 @@ print($_GET['info'] . ' '. substr($rawMetar, 7, 4) . 'Z ');
 
 // Operational Runway
 if ($type === 'D') {
-    print reform('DEP RWY '  . $_GET['dep']);
+    print ('DEP RWY ' . str_replace(',', ' AND ', $_GET['dep']));
 } elseif ($type === 'A') {
-    print reform('EXP ' . $_GET ['apptype'] . ' ARR RWY ' . $_GET['arr']);
+    print ('EXP ' . $_GET['apptype'] . ' ARR RWY ' . str_replace(',', ' AND ', $_GET['arr']));
 } else {
-    print reform('DEP RWY '  . $_GET['dep'] . ' EXP ' . $_GET ['apptype'] . ' ARR RWY ' . $_GET['arr']);
+    print ('DEP RWY ' . str_replace(',', ' AND ', $_GET['dep']) . ' EXP ' . $_GET['apptype'] . ' ARR RWY ' . str_replace(',', ' AND ', $_GET['arr']));
 }
+
 
 // Wind Shear Alert
 if ($decoded->getWindshearAllRunways()) {
