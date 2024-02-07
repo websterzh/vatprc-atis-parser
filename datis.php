@@ -94,13 +94,13 @@ if ($rvr != null) {
         switch ($runwayRvr->getPastTendency()) {
         case 'D':
                 print(' DOWNWARD TNDCY ');
-                    break;
+            break;
         case 'N':
                 print(' NC ');
-                    break;
+            break;
         case 'U':
                 print(' UPWARD TNDCY ');
-                    break;
+            break;
         }
     }
 }
@@ -188,13 +188,13 @@ $temp_data = $decoded->getAirTemperature()->getValue();
 $int_temp_data = (int)$temp_data;
 $str_temp_data = strval($int_temp_data);
 if ($int_temp_data < 10 && $int_temp_data > 0) {
-        $out_temp_data = '0' . $str_temp_data ;
-    } elseif ($int_temp_data < 0 && $int_temp_data > -10) {
-        $out_temp_data = '-0' . $str_temp_data[1];
-    } elseif ($int_temp_data == 0) {
-        $out_temp_data = '00';
-    } else {
-        $out_temp_data = $str_temp_data ;
+    $out_temp_data = '0' . $str_temp_data ;
+} elseif ($int_temp_data < 0 && $int_temp_data > -10) {
+    $out_temp_data = '-0' . $str_temp_data[1];
+} elseif ($int_temp_data == 0) {
+    $out_temp_data = '00';
+} else {
+    $out_temp_data = $str_temp_data ;
 }
 
 $dewpt_data = $decoded->getDewPointTemperature()->getValue();
