@@ -206,11 +206,12 @@ if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
 
 print(' TEMP ' . $out_temp_data . ' DEW POINT ' . $out_dewpt_data . ' QNH ' . $decoded->getPressure()->getValue() . ' HPA ');
 
-if (empty($phenomenon)) {
-} else {
-    if (in_array("DZ", $phenomenon[0]->getTypes()) or in_array("RA", $phenomenon[0]->getTypes()) or in_array("SN", $phenomenon[0]->getTypes()) or in_array("SG", $phenomenon[0]->getTypes())) {
-        print('ALL RWYS RWY CONDITION CODE 5 5 5 ISSUED AT ' . substr($rawMetar, 7, 4) . 'Z ALL PARTS WET DEPTH NOT REPORTED COVERAGE 100PCT ');
-    }
+if ((in_array("DZ", $phenomenon[0]->getTypes()))
+    || (in_array("RA", $phenomenon[0]->getTypes()))
+    || (in_array("SN", $phenomenon[0]->getTypes()))
+    || (in_array("SG", $phenomenon[0]->getTypes()))
+) {
+    print('ALL RWYS RWY CONDITION CODE 5 5 5 ISSUED AT ' . substr($rawMetar, 7, 4) . 'Z ALL PARTS WET DEPTH NOT REPORTED COVERAGE 100PCT ');
 }
 
 print ('REPORT RECEIPT OF ATIS ' . $_GET['info'] . ' ON ' . $decoded->getIcao());
