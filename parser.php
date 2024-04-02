@@ -5,7 +5,14 @@ use MetarDecoder\MetarDecoder;
 
 require __DIR__ . '/airports.php';
 
+if (!isset($_GET['metar'])) {
+    echo "'metar' parameter is required";
+    http_response_code(400);
+    die();
+}
+
 $rawMetar = $_GET['metar'];
+
 // FIXME: Dirty fix to issue caused by `8000NW` in the METAR
 // METAR ZMUB 100530Z VRB02MPS 8000NW BKN250 M07/M12 Q1005 NOSIG RMK QFE647.5 62 NW MO=
 $rawMetar = preg_replace('/ (\d{4})[NWSE]+ /', ' $1 ', $rawMetar);
