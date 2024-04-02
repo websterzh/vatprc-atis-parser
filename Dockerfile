@@ -16,11 +16,12 @@ COPY . .
 RUN composer dump-autoload
 
 
+####################################################
 
 FROM php:8.2-apache
 
 COPY *.php /var/www/html/
+COPY .htaccess /var/www/html/
 COPY --from=vendor app/vendor/ /var/www/html/vendor/
 
-
-
+EXPOSE 80
