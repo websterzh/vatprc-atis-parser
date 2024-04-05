@@ -61,77 +61,6 @@ if ($decoded->getWindshearAllRunways()) {
 
 //NOTAM (reserve)
 
-
-// Visibility
-if (strpos($rawMetar, 'CAVOK') !== false) {    
-    print(' CAVOK ');
-} else {
-    print(' VIS ' . $visObj->getVisibility()->getValue() . ' M ');
-}
-
-// RVR
-if ($rvr != null) {
-    foreach ($rvr as $runwayRvr) {
-        print('RVR RWY ');
-        print($runwayRvr->getRunway());
-        if ($runwayRvr->getVisualRange() == null) {
-            print(' BTW ');
-            print($runwayRvr->getVisualRangeInterval()[0]->getValue());
-            print(' M AND ');
-            print($runwayRvr->getVisualRangeInterval()[1]->getValue());
-            print(' M ');
-        } else {
-            print(' ');
-            print($runwayRvr->getVisualRange()->getValue());
-            print(' M');
-        }
-        switch ($runwayRvr->getPastTendency()) {
-        case 'D':
-                print(' DOWNWARD TNDCY ');
-            break;
-        case 'N':
-                print(' NC ');
-            break;
-        case 'U':
-                print(' UPWARD TNDCY ');
-            break;
-        }
-    }
-}
-
-// Cloud & Weather Phenomenon
-if (strpos($rawMetar, 'NSC') === true) {
-    print(' NSC');
-}
-foreach ($phenomenon as $pwn) {
-    if ((string)$pwn->getIntensityProximity() !== '') {
-        print($pwn->getIntensityProximity());
-    }
-    if ($pwn->getCharacteristics() !== '') {
-        print($pwn->getCharacteristics());
-    }
-    if (is_array($pwn->getTypes())) {
-        foreach ($pwn->getTypes() as $pwntype) {
-            print($pwntype);
-            print(' ');
-        }
-    } else {
-        print(' ');
-    }
-}
-foreach ($clouds as $cloud) {
-    print($cloud->getAmount());
-    $baseHeight = $cloud->getBaseHeight();
-    if ($baseHeight !== null) {
-        print(' ' . $cloud->getBaseHeight()->getValue() * 0.3);
-    } else {
-        print(' 0');
-    }
-    print('M');
-    print($cloud->getType());
-    print(' ');
-}
-
 // Wind
 print(' WIND ');
 
@@ -175,6 +104,76 @@ if ($surfaceWindObj->getDirectionVariations() != null) {
         print('0');
     }
     print($surfaceWindObj->getDirectionVariations()[1]->getValue() . ' DEG ');
+}
+
+// RVR
+if ($rvr != null) {
+    foreach ($rvr as $runwayRvr) {
+        print('RVR RWY ');
+        print($runwayRvr->getRunway());
+        if ($runwayRvr->getVisualRange() == null) {
+            print(' BTW ');
+            print($runwayRvr->getVisualRangeInterval()[0]->getValue());
+            print(' M AND ');
+            print($runwayRvr->getVisualRangeInterval()[1]->getValue());
+            print(' M ');
+        } else {
+            print(' ');
+            print($runwayRvr->getVisualRange()->getValue());
+            print(' M');
+        }
+        switch ($runwayRvr->getPastTendency()) {
+        case 'D':
+                print(' DOWNWARD TNDCY ');
+            break;
+        case 'N':
+                print(' NC ');
+            break;
+        case 'U':
+                print(' UPWARD TNDCY ');
+            break;
+        }
+    }
+}
+
+// Visibility
+if (strpos($rawMetar, 'CAVOK') !== false) {    
+    print(' CAVOK ');
+} else {
+    print(' VIS ' . $visObj->getVisibility()->getValue() . ' M ');
+}
+
+// Cloud & Weather Phenomenon
+if (strpos($rawMetar, 'NSC') === true) {
+    print(' NSC');
+}
+foreach ($phenomenon as $pwn) {
+    if ((string)$pwn->getIntensityProximity() !== '') {
+        print($pwn->getIntensityProximity());
+    }
+    if ($pwn->getCharacteristics() !== '') {
+        print($pwn->getCharacteristics());
+    }
+    if (is_array($pwn->getTypes())) {
+        foreach ($pwn->getTypes() as $pwntype) {
+            print($pwntype);
+            print(' ');
+        }
+    } else {
+        print(' ');
+    }
+}
+foreach ($clouds as $cloud) {
+    print($cloud->getAmount());
+    $baseHeight = $cloud->getBaseHeight();
+    if ($baseHeight !== null) {
+        print(' ' . $cloud->getBaseHeight()->getValue() * 0.3);
+    } else {
+        print(' 0');
+    }
+    print('M');
+    print($cloud->getType());
+    print(' ');
 }
 
 // Miscellaneous
