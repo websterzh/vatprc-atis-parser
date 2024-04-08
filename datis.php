@@ -228,13 +228,13 @@ if ($decoded->getIcao() == 'ZGGG'
         print('3600');
     }
 } elseif ($decoded->getIcao() == 'ZLLL'
-|| $decoded->getIcao() == 'ZWSH'
+    || $decoded->getIcao() == 'ZWSH'
 ) {
     print('4800');
 } elseif ($decoded->getIcao() == 'ZPPP') {
     print('6000');
 } elseif ($decoded->getIcao() == 'ZMCK'
-|| $decoded->getIcao() == 'ZMUB'
+    || $decoded->getIcao() == 'ZMUB'
 ) {
     print('4500');
 } else {
