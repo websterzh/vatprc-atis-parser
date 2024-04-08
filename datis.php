@@ -221,25 +221,25 @@ print('TRANSITION LEVEL ');
 if ($decoded->getIcao() == 'ZGGG'
     || $decoded->getIcao() == 'ZGSZ'
     || $decoded->getIcao() == 'ZGOW'
-    ) {
-        if ($decoded->getPressure()->getValue() >= '980') {
-            print('3300');
-        } else {
-            print('3600');
-        }
-    } elseif ($decoded->getIcao() == 'ZLLL'
-    || $decoded->getIcao() == 'ZWSH'
-    ) {
-        print('4800');
-    } elseif ($decoded->getIcao() == 'ZPPP') {
-        print('6000');
-    } elseif ($decoded->getIcao() == 'ZMCK'
-    || $decoded->getIcao() == 'ZMUB'
-    ) {
-        print('4500');
+) {
+    if ($decoded->getPressure()->getValue() >= '980') {
+        print('3300');
     } else {
         print('3600');
     }
+} elseif ($decoded->getIcao() == 'ZLLL'
+|| $decoded->getIcao() == 'ZWSH'
+) {
+    print('4800');
+} elseif ($decoded->getIcao() == 'ZPPP') {
+    print('6000');
+} elseif ($decoded->getIcao() == 'ZMCK'
+|| $decoded->getIcao() == 'ZMUB'
+) {
+    print('4500');
+} else {
+    print('3600');
+}
 
 print(' M ');
 
