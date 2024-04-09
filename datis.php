@@ -208,27 +208,21 @@ print(' TEMP ' . $out_temp_data . ' DEW POINT ' . $out_dewpt_data . ' QNH ' . $d
 //Transition Level
 print('TRANSITION LEVEL ');
 
-if ($decoded->getIcao() == 'ZGGG'
-    || $decoded->getIcao() == 'ZGSZ'
-    || $decoded->getIcao() == 'ZGOW'
-) {
-    if ($decoded->getPressure()->getValue() >= '980') {
-        print('3300');
-    } else {
-        print('3600');
-    }
-} elseif ($decoded->getIcao() == 'ZLLL'
-    || $decoded->getIcao() == 'ZWSH'
-) {
-    print('4800');
-} elseif ($decoded->getIcao() == 'ZPPP') {
-    print('6000');
-} elseif ($decoded->getIcao() == 'ZMCK'
-    || $decoded->getIcao() == 'ZMUB'
-) {
-    print('4500');
+$TLData = [
+    'ZGGG' => ["pressure" => 980, "TL" => 3300],
+    'ZGSZ' => ["pressure" => 980, "TL" => 3300],
+    'ZGOW' => ["pressure" => 980, "TL" => 3300],
+    'ZLLL' => ["TL" => 4800],
+    'ZWSH' => ["TL" => 4800],
+    'ZPPP' => ["TL" => 6000],
+    'ZMCK' => ["TL" => 4500],
+    'ZMUB' => ["TL" => 4500],
+];
+
+if (isset($TLData[$decoded->getIcao()]) && isset($TLData[$decoded->getIcao()]["pressure"])) {
+    print ($decoded->getPressure()->getValue() >= $TLData[$decoded->getIcao()]["pressure"]) ? $TLData[$decoded->getIcao()]["TL"] : '3600';
 } else {
-    print('3600');
+    print $TLData[$decoded->getIcao()]["TL"] ?? '3600';
 }
 
 print(' M ');
