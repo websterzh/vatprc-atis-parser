@@ -205,6 +205,29 @@ if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
 
 print(' TEMP ' . $out_temp_data . ' DEW POINT ' . $out_dewpt_data . ' QNH ' . $decoded->getPressure()->getValue() . ' HPA ');
 
+//Transition Level
+print('TRANSITION LEVEL ');
+
+$TLData = [
+    'ZGGG' => ["pressure" => 980, "TL" => 3300],
+    'ZGSZ' => ["pressure" => 980, "TL" => 3300],
+    'ZGOW' => ["pressure" => 980, "TL" => 3300],
+    'ZLLL' => ["TL" => 4800],
+    'ZWSH' => ["TL" => 4800],
+    'ZPPP' => ["TL" => 6000],
+    'ZMCK' => ["TL" => 4500],
+    'ZMUB' => ["TL" => 4500],
+];
+
+if (isset($TLData[$decoded->getIcao()]) && isset($TLData[$decoded->getIcao()]["pressure"])) {
+    print ($decoded->getPressure()->getValue() >= $TLData[$decoded->getIcao()]["pressure"]) ? $TLData[$decoded->getIcao()]["TL"] : '3600';
+} else {
+    print $TLData[$decoded->getIcao()]["TL"] ?? '3600';
+}
+
+print(' M ');
+
+//Runway Condition Code
 if (isset($phenomenon[0]) && !empty($phenomenon[0])) {
     if ((in_array("DZ", $phenomenon[0]->getTypes()))
         || (in_array("RA", $phenomenon[0]->getTypes()))
@@ -215,6 +238,7 @@ if (isset($phenomenon[0]) && !empty($phenomenon[0])) {
     }
 }
 
+// Closing Statement
 print('REPORT RECEIPT OF ATIS ' . $_GET['info'] . ' ON ' . $decoded->getIcao());
 
 ?>
