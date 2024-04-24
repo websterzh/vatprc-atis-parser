@@ -19,6 +19,7 @@ $phenomenon = $decoded->getPresentWeather(); //WeatherPhenomenon array
 $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
+$adelv = $_GET['adelv'] ?? null; //use for QFE calculation
 
 if ($decoded->isValid() == false) {
     exit('Invalid METAR.');
@@ -204,6 +205,10 @@ if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
 }
 
 print(' TEMP ' . $out_temp_data . ' DEW POINT ' . $out_dewpt_data . ' QNH ' . $decoded->getPressure()->getValue() . ' HPA ');
+
+if ($adelv !== null) {
+    print(' QFE ' . floor($decoded->getPressure()->getValue() - $adelv / 27) . ' HPA ');
+}
 
 //Transition Level
 print('TRANSITION LEVEL ');
