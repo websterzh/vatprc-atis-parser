@@ -210,13 +210,26 @@ print('TRANSITION LEVEL ');
 
 $TLData = [
     'ZGGG' => ["pressure" => 980, "TL" => 3300],
-    'ZGSZ' => ["pressure" => 980, "TL" => 3300],
     'ZGOW' => ["pressure" => 980, "TL" => 3300],
+    'ZGSD' => ["pressure" => 980, "TL" => 3300],
+    'ZGSZ' => ["pressure" => 980, "TL" => 3300],
+    'ZHSN' => ["TL" => 5100],
+    'ZHXY' => ["TL" => 2400],
     'ZLLL' => ["TL" => 4800],
-    'ZWSH' => ["TL" => 4800],
-    'ZPPP' => ["TL" => 6000],
+    'ZLXN' => ["TL" => 5400],
     'ZMCK' => ["TL" => 4500],
     'ZMUB' => ["TL" => 4500],
+    'ZPJH' => ["TL" => 4200],
+    'ZPLJ' => ["TL" => 6600],
+    'ZPMS' => ["TL" => 4800],
+    'ZPPP' => ["TL" => 6000],
+    'ZSCG' => ["TL" => 2400],
+    'ZSWH' => ["TL" => 2100],
+    'ZSWX' => ["TL" => 'BY ATC'],
+    'ZSYN' => ["TL" => 1800],
+    'ZULS' => ["TL" => 8100],
+    'ZUXC' => ["TL" => 5400],
+    'ZWSH' => ["TL" => 4800],
 ];
 
 if (isset($TLData[$decoded->getIcao()]) && isset($TLData[$decoded->getIcao()]["pressure"])) {
