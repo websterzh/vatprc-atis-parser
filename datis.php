@@ -207,7 +207,7 @@ if ($int_dewpt_data < 10 && $int_dewpt_data > 0) {
 print(' TEMP ' . $out_temp_data . ' DEW POINT ' . $out_dewpt_data . ' QNH ' . $decoded->getPressure()->getValue() . ' HPA ');
 
 if ($adelv !== null) {
-    print(' QFE ' . floor($decoded->getPressure()->getValue() - $adelv / 27) . ' HPA ');
+    print('QFE ' . floor($decoded->getPressure()->getValue() - $adelv / 27) . ' HPA ');
 }
 
 //Transition Level
