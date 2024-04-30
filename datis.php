@@ -19,7 +19,7 @@ $phenomenon = $decoded->getPresentWeather(); //WeatherPhenomenon array
 $clouds = $decoded->getClouds(); //CloudLayer array
 $windShearAlerts = $decoded->getWindshearRunways();
 $type = $_GET['type'] ?? null;
-$adelv = $_GET['adelv'] ?? null; //use for QFE calculation
+$adelv = $_GET['adelv'] ?? null; // Value for QFE calculation, type aerodrome elevation in feet.
 
 if ($decoded->isValid() == false) {
     exit('Invalid METAR.');
